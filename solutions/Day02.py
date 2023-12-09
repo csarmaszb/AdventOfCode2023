@@ -2,7 +2,8 @@ red = 12
 green = 13
 blue = 14
 
-def solvePart1(input: str):
+
+def solve_part_1(input: str):
     print("solve part 1")
     sum = 0
     splits = input.split("\n")
@@ -31,11 +32,11 @@ def solvePart1(input: str):
                     if int(tmp[0]) > green:
                         possible = False
         if possible:
-            sum = sum + gameid
+            sum += gameid
     print(sum)
 
 
-def solvePart2(input: str):
+def solve_part_2(input: str):
     print("solve part 2")
     sum = 0
     splits = input.split("\n")
@@ -65,5 +66,5 @@ def solvePart2(input: str):
                 if len(tmp) == 2:
                     if int(tmp[0]) > maxgreen:
                         maxgreen = int(tmp[0])
-        sum = sum + (maxred * maxblue * maxgreen)
+        sum += maxred * maxblue * maxgreen
     print(sum)

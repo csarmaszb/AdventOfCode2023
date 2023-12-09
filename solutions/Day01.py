@@ -15,48 +15,42 @@ mapping = {
 }
 
 
-def solvePart1(input: str):
+def solve_part_1(input: str):
     print("solve part 1")
     splits = input.split("\n")
     numbers = list()
     for s in splits:
-        n = re.findall("\d", s)
-        if len(n) == 1:
-            numbers.append(int(n[0] + n[0]))
-        else:
-            numbers.append(int(n[0] + n[-1]))
+        n = re.findall("\\d", s)
+        numbers.append(int(n[0] + n[-1]))
     print(sum(numbers))
 
 
-def solvePart2(input: str):
+def solve_part_2(input: str):
     print("solve part 2")
     splits = input.split("\n")
     numbers = list()
     for s in splits:
-        min, smin, max, smax = minMaxSearch(s)
-        if max == min + len(smin) - 1 and len(re.findall("\d", s[:max])) > 0:
+        min, smin, max, smax = min_max_search(s)
+        if max == min + len(smin) - 1 and len(re.findall("\\d", s[:max])) > 0:
             if smax != "":
                 s = s[:max] + mapping[smax] + s[max + len(smax):]
-            min, smin, max, smax = minMaxSearch(s)
+            min, smin, max, smax = min_max_search(s)
             if smin != "":
                 s = s.replace(smin, mapping[smin], 1)
         else:
             if smin != "":
                 s = s.replace(smin, mapping[smin], 1)
-            min, smin, max, smax = minMaxSearch(s)
+            min, smin, max, smax = min_max_search(s)
             if smax != "":
                 s = s[:max] + mapping[smax] + s[max + len(smax):]
 
-        n = re.findall("\d", s)
+        n = re.findall("\\d", s)
         # print(n)
-        if len(n) == 1:
-            numbers.append(int(n[0] + n[0]))
-        else:
-            numbers.append(int(n[0] + n[-1]))
+        numbers.append(int(n[0] + n[-1]))
     print(sum(numbers))
 
 
-def minMaxSearch(s: str) -> [int, str, int, str]:
+def min_max_search(s: str) -> [int, str, int, str]:
     min = math.inf
     smin = ""
     for d in strDigits:
